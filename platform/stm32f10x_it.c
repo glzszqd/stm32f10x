@@ -23,9 +23,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_it.h"
-#include "..\app\Include.h"
-#include "..\app\app.h"  
+#include "hal.h"
 
+extern hal_interrupt_desc_t interrupt_desc[];
 
 /** @addtogroup STM32F10x_StdPeriph_Template
   * @{
@@ -138,7 +138,6 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
 	
-	SystemTickInt();
 }
 
 
@@ -153,6 +152,7 @@ void SysTick_Handler(void)
 *******************************************************************************/
 void WWDG_IRQHandler(void)
 {
+	hal_interrupt_callback(WWDG_IRQn);
 }
 
 /*******************************************************************************
@@ -164,6 +164,7 @@ void WWDG_IRQHandler(void)
 *******************************************************************************/
 void PVD_IRQHandler(void)
 {
+	hal_interrupt_callback(PVD_IRQn);
 }
 
 /*******************************************************************************
@@ -175,6 +176,7 @@ void PVD_IRQHandler(void)
 *******************************************************************************/
 void TAMPER_IRQHandler(void)
 {
+	hal_interrupt_callback(TAMPER_IRQn);
 }
 
 /*******************************************************************************
@@ -186,6 +188,7 @@ void TAMPER_IRQHandler(void)
 *******************************************************************************/
 void RTC_IRQHandler(void)
 {
+	hal_interrupt_callback(RTC_IRQn);
 }
 
 /*******************************************************************************
@@ -197,6 +200,7 @@ void RTC_IRQHandler(void)
 *******************************************************************************/
 void FLASH_IRQHandler(void)
 {
+	hal_interrupt_callback(FLASH_IRQn);
 }
 
 /*******************************************************************************
@@ -208,6 +212,7 @@ void FLASH_IRQHandler(void)
 *******************************************************************************/
 void RCC_IRQHandler(void)
 {
+	hal_interrupt_callback(RCC_IRQn);
 }
 
 /*******************************************************************************
@@ -219,6 +224,7 @@ void RCC_IRQHandler(void)
 *******************************************************************************/
 void EXTI0_IRQHandler(void)
 {
+	hal_interrupt_callback(EXTI0_IRQn);
 }
 
 /*******************************************************************************
@@ -230,6 +236,7 @@ void EXTI0_IRQHandler(void)
 *******************************************************************************/
 void EXTI1_IRQHandler(void)
 {
+	hal_interrupt_callback(EXTI1_IRQn);
 }
 
 /*******************************************************************************
@@ -241,6 +248,7 @@ void EXTI1_IRQHandler(void)
 *******************************************************************************/
 void EXTI2_IRQHandler(void)
 {
+	hal_interrupt_callback(EXTI2_IRQn);
 }
 
 /*******************************************************************************
@@ -252,14 +260,7 @@ void EXTI2_IRQHandler(void)
 *******************************************************************************/
 void EXTI3_IRQHandler(void)
 {
-/*
-	if(EXTI_GetITStatus(EXTI_Line3) != RESET)
-	{
-		Channel1Pulse+=10;
-		TIM_SetCompare1(TIM2, Channel1Pulse);
-   		EXTI_ClearITPendingBit(EXTI_Line3);	  //外部中断 temper
-	}
-	*/
+	hal_interrupt_callback(EXTI3_IRQn);
 }
 
 /*******************************************************************************
@@ -271,10 +272,7 @@ void EXTI3_IRQHandler(void)
 *******************************************************************************/
 void EXTI4_IRQHandler(void)
 {
-	//if(EXTI_GetITStatus(EXTI_Line4)  != RESET)
-	//{
-		//EXTI_ClearITPendingBit(EXTI_Line4);
-	//}
+	hal_interrupt_callback(EXTI4_IRQn);
 }
 
 /*******************************************************************************
@@ -286,13 +284,7 @@ void EXTI4_IRQHandler(void)
 *******************************************************************************/
 void DMA1_Channel1_IRQHandler(void)
 {
-	
-	if(DMA_GetITStatus(DMA1_IT_TC1))
-	{
-
-	 
-		DMA_ClearITPendingBit(DMA1_IT_GL1);
-	}
+	hal_interrupt_callback(DMA1_Channel1_IRQn);
 }
 
 /*******************************************************************************
@@ -304,6 +296,7 @@ void DMA1_Channel1_IRQHandler(void)
 *******************************************************************************/
 void DMA1_Channel2_IRQHandler(void)
 {
+	hal_interrupt_callback(DMA1_Channel2_IRQn);
 }
 
 /*******************************************************************************
@@ -315,6 +308,7 @@ void DMA1_Channel2_IRQHandler(void)
 *******************************************************************************/
 void DMA1_Channel3_IRQHandler(void)
 {
+	hal_interrupt_callback(DMA1_Channel3_IRQn);
 }
 
 /*******************************************************************************
@@ -326,6 +320,7 @@ void DMA1_Channel3_IRQHandler(void)
 *******************************************************************************/
 void DMA1_Channel4_IRQHandler(void)
 {
+	hal_interrupt_callback(DMA1_Channel4_IRQn);
 }
 
 /*******************************************************************************
@@ -337,6 +332,7 @@ void DMA1_Channel4_IRQHandler(void)
 *******************************************************************************/
 void DMA1_Channel5_IRQHandler(void)
 {
+	hal_interrupt_callback(DMA1_Channel5_IRQn);
 }
 
 /*******************************************************************************
@@ -348,6 +344,7 @@ void DMA1_Channel5_IRQHandler(void)
 *******************************************************************************/
 void DMA1_Channel6_IRQHandler(void)
 {
+	hal_interrupt_callback(DMA1_Channel6_IRQn);
 }
 
 /*******************************************************************************
@@ -359,6 +356,7 @@ void DMA1_Channel6_IRQHandler(void)
 *******************************************************************************/
 void DMA1_Channel7_IRQHandler(void)
 {
+	hal_interrupt_callback(DMA1_Channel7_IRQn);
 }
 
 /*******************************************************************************
@@ -370,6 +368,7 @@ void DMA1_Channel7_IRQHandler(void)
 *******************************************************************************/
 void ADC1_2_IRQHandler(void)
 {
+	hal_interrupt_callback(ADC1_2_IRQn);
 }
 
 /*******************************************************************************
@@ -382,6 +381,7 @@ void ADC1_2_IRQHandler(void)
 *******************************************************************************/
 void USB_HP_CAN_TX_IRQHandler(void)
 {
+	hal_interrupt_callback(USB_HP_CAN1_TX_IRQn);
 }
 
 /*******************************************************************************
@@ -394,7 +394,7 @@ void USB_HP_CAN_TX_IRQHandler(void)
 *******************************************************************************/
 void USB_LP_CAN1_RX0_IRQHandler(void)
 {
-	
+	hal_interrupt_callback(USB_LP_CAN1_RX0_IRQn);
 }
 /*******************************************************************************
 * Function Name  : CAN_RX1_IRQHandler
@@ -405,7 +405,7 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 *******************************************************************************/
 void CAN1_RX1_IRQHandler(void)
 {
-	
+	hal_interrupt_callback(CAN1_RX1_IRQn);
 }
 
 /*******************************************************************************
@@ -417,6 +417,7 @@ void CAN1_RX1_IRQHandler(void)
 *******************************************************************************/
 void CAN_SCE_IRQHandler(void)
 {
+	hal_interrupt_callback(CAN1_SCE_IRQn);
 }
 
 /*******************************************************************************
@@ -428,6 +429,7 @@ void CAN_SCE_IRQHandler(void)
 *******************************************************************************/
 void EXTI9_5_IRQHandler(void)
 {
+	hal_interrupt_callback(EXTI9_5_IRQn);
 }
 
 /*******************************************************************************
@@ -439,6 +441,7 @@ void EXTI9_5_IRQHandler(void)
 *******************************************************************************/
 void TIM1_BRK_IRQHandler(void)
 {
+	hal_interrupt_callback(TIM1_BRK_IRQn);
 }
 
 /*******************************************************************************
@@ -451,7 +454,7 @@ void TIM1_BRK_IRQHandler(void)
 *******************************************************************************/
 void TIM1_UP_IRQHandler(void)
 {				
-	 
+	 hal_interrupt_callback(TIM1_UP_IRQn);
 }
 
 /*******************************************************************************
@@ -464,6 +467,7 @@ void TIM1_UP_IRQHandler(void)
 *******************************************************************************/
 void TIM1_TRG_COM_IRQHandler(void)
 {
+	hal_interrupt_callback(TIM1_TRG_COM_IRQn);
 }
 
 /*******************************************************************************
@@ -475,8 +479,7 @@ void TIM1_TRG_COM_IRQHandler(void)
 *******************************************************************************/
 void TIM1_CC_IRQHandler(void)
 {
-
-   
+   hal_interrupt_callback(TIM1_CC_IRQn);
 }
 
 /*******************************************************************************
@@ -488,7 +491,7 @@ void TIM1_CC_IRQHandler(void)
 *******************************************************************************/
 void TIM2_IRQHandler(void)
 {
-	SteerEncoderInt();
+	hal_interrupt_callback(TIM2_IRQn);
 }
 
 /*******************************************************************************
@@ -500,7 +503,7 @@ void TIM2_IRQHandler(void)
 *******************************************************************************/
 void TIM3_IRQHandler(void)
 {
-
+	hal_interrupt_callback(TIM3_IRQn);
 }
 
 /*******************************************************************************
@@ -512,7 +515,7 @@ void TIM3_IRQHandler(void)
 *******************************************************************************/
 void TIM4_IRQHandler(void)
 {
-	SteerHallTimInt();
+	hal_interrupt_callback(TIM4_IRQn);
 }
 
 /*******************************************************************************
@@ -524,6 +527,7 @@ void TIM4_IRQHandler(void)
 *******************************************************************************/
 void I2C1_EV_IRQHandler(void)
 {
+	hal_interrupt_callback(I2C1_EV_IRQn);
 }
 
 /*******************************************************************************
@@ -535,6 +539,7 @@ void I2C1_EV_IRQHandler(void)
 *******************************************************************************/
 void I2C1_ER_IRQHandler(void)
 {
+	hal_interrupt_callback(I2C1_ER_IRQn);
 }
 
 /*******************************************************************************
@@ -546,6 +551,7 @@ void I2C1_ER_IRQHandler(void)
 *******************************************************************************/
 void I2C2_EV_IRQHandler(void)
 {
+	hal_interrupt_callback(I2C2_EV_IRQn);
 }
 
 /*******************************************************************************
@@ -557,6 +563,7 @@ void I2C2_EV_IRQHandler(void)
 *******************************************************************************/
 void I2C2_ER_IRQHandler(void)
 {
+	hal_interrupt_callback(I2C2_ER_IRQn);
 }
 
 /*******************************************************************************
@@ -568,6 +575,7 @@ void I2C2_ER_IRQHandler(void)
 *******************************************************************************/
 void SPI1_IRQHandler(void)
 {
+	hal_interrupt_callback(SPI1_IRQn);
 }
 
 /*******************************************************************************
@@ -579,6 +587,7 @@ void SPI1_IRQHandler(void)
 *******************************************************************************/
 void SPI2_IRQHandler(void)
 {
+	hal_interrupt_callback(SPI2_IRQn);
 }
 
 /*******************************************************************************
@@ -590,7 +599,7 @@ void SPI2_IRQHandler(void)
 *******************************************************************************/
 void USART1_IRQHandler(void)
 {
-  	Usart1Int();
+  	hal_interrupt_callback(USART1_IRQn);
 }
 
 /*******************************************************************************
@@ -602,8 +611,7 @@ void USART1_IRQHandler(void)
 *******************************************************************************/
 void USART2_IRQHandler(void)
 {
-	Usart2Int();
- 	
+	hal_interrupt_callback(USART2_IRQn);
 }
 
 /*******************************************************************************
@@ -615,7 +623,7 @@ void USART2_IRQHandler(void)
 *******************************************************************************/
 void USART3_IRQHandler(void)
 {
-   
+   hal_interrupt_callback(USART3_IRQn);
 }
 
 /*******************************************************************************
@@ -627,13 +635,7 @@ void USART3_IRQHandler(void)
 *******************************************************************************/
 void EXTI15_10_IRQHandler(void)
 {
-/*	if(EXTI_GetITStatus(EXTI_Line13) != RESET)
-	{
-		TimerPeriod+=10;
-		TIM_SetAutoreload(TIM2, TimerPeriod);
-   		EXTI_ClearITPendingBit(EXTI_Line13);	  //外部中断 temper
-	}
-*/
+	hal_interrupt_callback(EXTI15_10_IRQn);
 }
 
 /*******************************************************************************
@@ -645,6 +647,7 @@ void EXTI15_10_IRQHandler(void)
 *******************************************************************************/
 void RTCAlarm_IRQHandler(void)
 {
+	hal_interrupt_callback(RTCAlarm_IRQn);
 }
 
 /*******************************************************************************
@@ -656,6 +659,7 @@ void RTCAlarm_IRQHandler(void)
 *******************************************************************************/
 void USBWakeUp_IRQHandler(void)
 {
+	hal_interrupt_callback(USBWakeUp_IRQn);
 }
 
 /*******************************************************************************
@@ -667,6 +671,7 @@ void USBWakeUp_IRQHandler(void)
 *******************************************************************************/
 void TIM8_BRK_IRQHandler(void)
 {
+	hal_interrupt_callback(TIM8_BRK_IRQn);
 }
 
 /*******************************************************************************
@@ -679,7 +684,7 @@ void TIM8_BRK_IRQHandler(void)
 *******************************************************************************/
 void TIM8_UP_IRQHandler(void)
 {
-	
+	hal_interrupt_callback(TIM8_UP_IRQn);
 }
 
 /*******************************************************************************
@@ -692,9 +697,7 @@ void TIM8_UP_IRQHandler(void)
 *******************************************************************************/
 void TIM8_TRG_COM_IRQHandler(void)
 {
-	
-
-	SteerPwmComInt();
+	hal_interrupt_callback(TIM8_TRG_COM_IRQn);
 }
 
 /*******************************************************************************
@@ -706,6 +709,7 @@ void TIM8_TRG_COM_IRQHandler(void)
 *******************************************************************************/
 void TIM8_CC_IRQHandler(void)
 {
+	hal_interrupt_callback(TIM8_CC_IRQn);
 }
 
 /*******************************************************************************
@@ -717,6 +721,7 @@ void TIM8_CC_IRQHandler(void)
 *******************************************************************************/
 void ADC3_IRQHandler(void)
 {
+	hal_interrupt_callback(ADC3_IRQn);
 }
 
 /*******************************************************************************
@@ -728,6 +733,7 @@ void ADC3_IRQHandler(void)
 *******************************************************************************/
 void FSMC_IRQHandler(void)
 {
+	hal_interrupt_callback(FSMC_IRQn);
 }
 
 /*******************************************************************************
@@ -739,6 +745,7 @@ void FSMC_IRQHandler(void)
 *******************************************************************************/
 void SDIO_IRQHandler(void)
 {
+	hal_interrupt_callback(SDIO_IRQn);
 }
 
 /*******************************************************************************
@@ -750,7 +757,7 @@ void SDIO_IRQHandler(void)
 *******************************************************************************/
 void TIM5_IRQHandler(void)
 {
-	
+	hal_interrupt_callback(TIM5_IRQn);
 }
 
 /*******************************************************************************
@@ -762,6 +769,7 @@ void TIM5_IRQHandler(void)
 *******************************************************************************/
 void SPI3_IRQHandler(void)
 {
+	hal_interrupt_callback(SPI3_IRQn);
 }
 
 /*******************************************************************************
@@ -773,7 +781,7 @@ void SPI3_IRQHandler(void)
 *******************************************************************************/
 void UART4_IRQHandler(void)
 {
-	
+	hal_interrupt_callback(UART4_IRQn);
 }
 
 /*******************************************************************************
@@ -785,7 +793,7 @@ void UART4_IRQHandler(void)
 *******************************************************************************/
 void UART5_IRQHandler(void)
 {
-	
+	hal_interrupt_callback(UART5_IRQn);	
 }
 
 /*******************************************************************************
@@ -797,10 +805,7 @@ void UART5_IRQHandler(void)
 *******************************************************************************/
 void TIM6_IRQHandler(void)
 {
-	//if(TIM_GetITStatus(TIM6,TIM_IT_Update)  != RESET)
-	//{
-		//TIM_ClearITPendingBit(TIM6,TIM_IT_Update);
-	//}
+	hal_interrupt_callback(TIM6_IRQn);
 }
 
 /*******************************************************************************
@@ -812,6 +817,7 @@ void TIM6_IRQHandler(void)
 *******************************************************************************/
 void TIM7_IRQHandler(void)
 {
+	hal_interrupt_callback(TIM7_IRQn);
 }
 
 /*******************************************************************************
@@ -823,6 +829,7 @@ void TIM7_IRQHandler(void)
 *******************************************************************************/
 void DMA2_Channel1_IRQHandler(void)
 {
+	hal_interrupt_callback(DMA2_Channel1_IRQn);
 }
 
 /*******************************************************************************
@@ -834,6 +841,7 @@ void DMA2_Channel1_IRQHandler(void)
 *******************************************************************************/
 void DMA2_Channel2_IRQHandler(void)
 {
+	hal_interrupt_callback(DMA2_Channel2_IRQn);
 }
 
 /*******************************************************************************
@@ -845,6 +853,7 @@ void DMA2_Channel2_IRQHandler(void)
 *******************************************************************************/
 void DMA2_Channel3_IRQHandler(void)
 {
+	hal_interrupt_callback(DMA2_Channel3_IRQn);
 }
 
 /*******************************************************************************
@@ -857,6 +866,7 @@ void DMA2_Channel3_IRQHandler(void)
 *******************************************************************************/
 void DMA2_Channel4_5_IRQHandler(void)
 {
+	hal_interrupt_callback(DMA2_Channel4_5_IRQn);
 }
 
 /******************* (C) COPYRIGHT 2008 STMicroelectronics *****END OF FILE****/
